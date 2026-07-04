@@ -1,0 +1,366 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Singularity - Web</title>
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+        />
+        <link rel="stylesheet" href="style.css" />
+        <link rel="icon" href="./logo.png" />
+    </head>
+    <body>
+        <div id="app">
+            <nav class="navbar">
+                <span class="brand"
+                    ><img src="./logo.png" alt="" /><a href="/#"
+                        >Singularity - Web</a
+                    ></span
+                >
+                <form id="search-form" class="navbar-search">
+                    <div class="search-wrapper">
+                        <i class="bi bi-search search-icon"></i>
+                        <input
+                            id="search-input"
+                            type="search"
+                            placeholder="Search songs, albums, artists..."
+                            autocomplete="off"
+                        />
+                        <button type="submit" class="search-btn">Search</button>
+                    </div>
+                </form>
+                <div class="nav-actions">
+                    <a
+                        href="#/settings"
+                        class="nav-btn"
+                        data-nav="settings"
+                        aria-label="Settings"
+                    >
+                        <i class="bi bi-gear"></i>
+                    </a>
+                </div>
+            </nav>
+
+            <aside id="notice-banner" class="notice-banner hidden">
+                <span
+                    >This is a <strong>test website</strong> for the Singularity
+                    Project. Get the full features —
+                    <a
+                        href="https://singularity.pages.dev"
+                        id="dl-link"
+                        target="_blank"
+                        rel="noreferrer"
+                        >download for your OS</a
+                    ></span
+                >
+                <button id="dismiss-notice" type="button" aria-label="Dismiss">
+                    &times;
+                </button>
+            </aside>
+            <main id="main-view" class="view active">
+                <nav class="cat-sidebar" id="cat-sidebar">
+                    <button
+                        class="cat-btn active"
+                        data-type="songs"
+                        title="Songs"
+                    >
+                        <i class="bi bi-music-note-beamed"></i>
+                    </button>
+                    <button class="cat-btn" data-type="albums" title="Albums">
+                        <i class="bi bi-disc"></i>
+                    </button>
+                    <button class="cat-btn" data-type="artists" title="Artists">
+                        <i class="bi bi-person-badge"></i>
+                    </button>
+                    <button
+                        class="cat-btn"
+                        data-type="playlists"
+                        title="Playlists"
+                    >
+                        <i class="bi bi-music-note-list"></i>
+                    </button>
+                </nav>
+                <section id="detail-view" class="detail-view hidden"></section>
+                <section
+                    id="results"
+                    class="results"
+                    aria-live="polite"
+                ></section>
+            </main>
+
+            <section id="settings-view" class="view">
+                <div class="settings-header">
+                    <a
+                        href="#/"
+                        class="back-btn"
+                        data-nav="main"
+                        aria-label="Back"
+                    >
+                        <i class="bi bi-arrow-left"></i>
+                    </a>
+                    <h2>Settings</h2>
+                </div>
+
+                <div class="settings-body">
+                    <div class="settings-section">
+                        <h3 class="settings-section-title">Appearance</h3>
+                        <div class="setting-row">
+                            <label for="theme-mode">Theme</label>
+                            <select id="theme-mode">
+                                <option value="dark">Dark</option>
+                                <option value="light">Light</option>
+                                <option value="midnight">Midnight</option>
+                                <option value="solar">Solar</option>
+                            </select>
+                        </div>
+                        <div class="setting-row">
+                            <label for="accent-color">Accent</label>
+                            <input
+                                id="accent-color"
+                                type="color"
+                                value="#6366f1"
+                            />
+                        </div>
+
+                        <div class="setting-row">
+                            <label for="layout-style">Layout</label>
+                            <select id="layout-style">
+                                <option value="grid">Grid</option>
+                                <option value="list">List</option>
+                                <option value="compact">Compact</option>
+                            </select>
+                        </div>
+                        <div class="setting-row">
+                            <label for="image-shape">Image shape</label>
+                            <select id="image-shape">
+                                <option value="rounded">Rounded</option>
+                                <option value="square">Square</option>
+                                <option value="circle">Circle</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="settings-section">
+                        <h3 class="settings-section-title">Dimensions</h3>
+                        <div class="setting-row">
+                            <label
+                                >Radius
+                                <span class="setting-value" id="radius-output"
+                                    >18px</span
+                                ></label
+                            >
+                            <input
+                                id="radius-range"
+                                type="range"
+                                min="0"
+                                max="34"
+                                value="18"
+                            />
+                        </div>
+                        <div class="setting-row">
+                            <label
+                                >Density
+                                <span class="setting-value" id="density-output"
+                                    >12px</span
+                                ></label
+                            >
+                            <input
+                                id="density-range"
+                                type="range"
+                                min="6"
+                                max="22"
+                                value="12"
+                            />
+                        </div>
+                        <div class="setting-row">
+                            <label
+                                >Font scale
+                                <span class="setting-value" id="font-output"
+                                    >100%</span
+                                ></label
+                            >
+                            <input
+                                id="font-range"
+                                type="range"
+                                min="85"
+                                max="120"
+                                value="100"
+                            />
+                        </div>
+                    </div>
+
+                    <div class="settings-section">
+                        <h3 class="settings-section-title">Audio</h3>
+                        <div class="setting-row">
+                            <label for="quality-select">Quality</label>
+                            <select id="quality-select">
+                                <option value="4">320 kbps</option>
+                                <option value="3">160 kbps</option>
+                                <option value="2">96 kbps</option>
+                                <option value="1">48 kbps</option>
+                                <option value="0">12 kbps</option>
+                            </select>
+                        </div>
+                        <div class="setting-row">
+                            <label
+                                >Results
+                                <span class="setting-value" id="limit-output"
+                                    >24</span
+                                ></label
+                            >
+                            <input
+                                id="limit-range"
+                                type="range"
+                                min="6"
+                                max="50"
+                                value="24"
+                            />
+                        </div>
+                        <div class="setting-row">
+                            <label for="api-base">API endpoint</label>
+                            <input
+                                id="api-base"
+                                type="url"
+                                value="https://teenapi.dino.icu/api"
+                            />
+                        </div>
+                    </div>
+
+                    <div class="settings-section">
+                        <h3 class="settings-section-title">Toggles</h3>
+
+                        <div class="setting-row toggle-row">
+                            <label for="motion-toggle">Motion</label>
+                            <input id="motion-toggle" type="checkbox" checked />
+                        </div>
+                        <div class="setting-row toggle-row">
+                            <label for="explicit-toggle"
+                                >Show explicit tags</label
+                            >
+                            <input
+                                id="explicit-toggle"
+                                type="checkbox"
+                                checked
+                            />
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <footer id="player" class="player">
+            <div class="player-inner">
+                <img id="player-img" alt="" />
+                <div class="player-meta">
+                    <span id="player-title">Nothing playing</span>
+                    <span id="player-artist">Search and play a track</span>
+                </div>
+                <div class="player-controls">
+                    <button
+                        id="prev-btn"
+                        type="button"
+                        aria-label="Previous track"
+                    >
+                        <i class="bi bi-skip-start-fill"></i>
+                    </button>
+                    <button
+                        id="play-pause-btn"
+                        type="button"
+                        aria-label="Play/Pause"
+                    >
+                        <i class="bi bi-play-fill"></i>
+                    </button>
+                    <button id="next-btn" type="button" aria-label="Next track">
+                        <i class="bi bi-skip-end-fill"></i>
+                    </button>
+                </div>
+                <div class="player-timing">
+                    <span id="current-time" class="time-label">0:00</span>
+                    <input
+                        id="progress-bar"
+                        type="range"
+                        min="0"
+                        max="100"
+                        value="0"
+                        step="0.1"
+                        aria-label="Seek"
+                    />
+                    <span id="total-time" class="time-label">0:00</span>
+                </div>
+                <button
+                    id="expand-player"
+                    class="expand-player"
+                    type="button"
+                    aria-label="Fullscreen player"
+                >
+                    <i class="bi bi-arrows-angle-expand"></i>
+                </button>
+                <button
+                    id="close-player"
+                    class="close-player"
+                    type="button"
+                    aria-label="Close player"
+                >
+                    <i class="bi bi-x-lg"></i>
+                </button>
+                <audio id="audio" preload="none"></audio>
+            </div>
+        </footer>
+
+        <section id="fullscreen-view" class="view fullscreen-view">
+            <div class="fullscreen-bg" id="fullscreen-bg"></div>
+            <div class="fullscreen-inner">
+                <div class="fullscreen-top">
+                    <a href="#/" class="nav-btn" aria-label="Minimize">
+                        <i class="bi bi-arrows-angle-contract"></i>
+                    </a>
+                    <span class="fullscreen-now">Now Playing</span>
+                    <a href="#/settings" class="nav-btn" aria-label="Settings">
+                        <i class="bi bi-gear"></i>
+                    </a>
+                </div>
+                <div class="fullscreen-body">
+                    <img id="fs-img" alt="" />
+                    <h2 id="fs-title">Nothing playing</h2>
+                    <p id="fs-artist">Search and play a track</p>
+                    <div class="fs-progress">
+                        <span id="fs-current" class="time-label">0:00</span>
+                        <input
+                            id="fs-progress"
+                            type="range"
+                            min="0"
+                            max="100"
+                            value="0"
+                            step="0.1"
+                            aria-label="Seek"
+                        />
+                        <span id="fs-total" class="time-label">0:00</span>
+                    </div>
+                    <div class="fs-controls">
+                        <button
+                            id="fs-prev"
+                            type="button"
+                            aria-label="Previous"
+                        >
+                            <i class="bi bi-skip-start-fill"></i>
+                        </button>
+                        <button
+                            id="fs-play-pause"
+                            type="button"
+                            aria-label="Play/Pause"
+                        >
+                            <i class="bi bi-play-fill"></i>
+                        </button>
+                        <button id="fs-next" type="button" aria-label="Next">
+                            <i class="bi bi-skip-end-fill"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <script src="script.js"></script>
+    </body>
+</html>
