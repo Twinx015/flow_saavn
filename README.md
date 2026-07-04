@@ -5,7 +5,7 @@ This is just a music player , a smaller part of something bigger - it is part of
 ## Usage 
 Open the link in web browser
 ```bash
-https://philast-015.github.io/Singularity-Web
+https://philast-015.github.io/Singularity-Web/
 ```
 
 ## Cloning
