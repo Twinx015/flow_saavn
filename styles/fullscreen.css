@@ -1,0 +1,263 @@
+/* Fullscreen player */
+
+.fullscreen-view {
+    --player-surface: var(--bg);
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    display: none;
+    flex-direction: column;
+    background: var(--player-surface);
+    animation: none;
+}
+
+body.player-tint .fullscreen-view {
+    --player-surface: color-mix(
+        in srgb,
+        var(--player-accent) 5%,
+        var(--bg)
+    );
+}
+
+.fullscreen-view.active {
+    display: flex;
+}
+
+.fs-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 18px 24px;
+}
+
+.fs-eyebrow {
+    color: var(--muted);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+}
+
+.fs-top-actions {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.fs-stage {
+    display: grid;
+    grid-template-columns: minmax(280px, 420px) minmax(320px, 1fr) minmax(
+            240px,
+            300px
+        );
+    align-items: center;
+    gap: 48px;
+    width: min(1240px, 100%);
+    min-height: 0;
+    margin: 0 auto;
+    padding: 8px 40px 40px;
+    overflow-y: auto;
+}
+
+.fs-art-col {
+    min-width: 0;
+}
+
+.fs-art-frame {
+    position: relative;
+    width: 100%;
+    max-width: 420px;
+    aspect-ratio: 1;
+    margin: 0 auto;
+}
+
+.fs-vinyl {
+    position: absolute;
+    top: 5%;
+    right: -14%;
+    display: grid;
+    place-items: center;
+    width: 94%;
+    aspect-ratio: 1;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 50%;
+    background: #0b0b0e;
+}
+
+.fs-vinyl::before,
+.fs-vinyl::after {
+    content: "";
+    position: absolute;
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.fs-vinyl::before {
+    inset: 9%;
+}
+
+.fs-vinyl::after {
+    inset: 20%;
+}
+
+.fs-vinyl img {
+    width: 34%;
+    height: 34%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+#fs-img {
+    position: relative;
+    z-index: 1;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border: 1px solid var(--player-line);
+    border-radius: var(--player-radius);
+    background: var(--bg-soft);
+}
+
+.fs-panel {
+    min-width: 0;
+}
+
+.fs-source {
+    overflow: hidden;
+    color: var(--muted);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-overflow: ellipsis;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+#fs-title {
+    display: -webkit-box;
+    overflow: hidden;
+    margin-top: 12px;
+    font-size: clamp(2rem, 3.2vw, 3rem);
+    font-weight: 700;
+    letter-spacing: -0.035em;
+    line-height: 1.03;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+
+#fs-artist {
+    display: -webkit-box;
+    overflow: hidden;
+    margin-top: 12px;
+    color: var(--muted);
+    font-size: 0.98rem;
+    line-height: 1.45;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+
+.fs-scrub {
+    margin-top: 30px;
+}
+
+.fs-scrub .scrub {
+    height: 20px;
+}
+
+.fs-scrub .scrub-rail,
+.fs-scrub .scrub-fill {
+    height: 4px;
+}
+
+.fs-scrub input[type="range"]::-webkit-slider-thumb {
+    width: 13px;
+    height: 13px;
+    margin-top: -4.5px;
+    opacity: 1;
+}
+
+.fs-scrub input[type="range"]::-moz-range-thumb {
+    width: 13px;
+    height: 13px;
+    opacity: 1;
+}
+
+.fs-times {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5px;
+}
+
+.fs-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 20px;
+}
+
+.fs-controls .icon-btn {
+    width: 42px;
+    height: 42px;
+    font-size: 1.1rem;
+}
+
+.fs-play-btn {
+    width: 58px;
+    height: 58px;
+    margin: 0 4px;
+    font-size: 1.45rem;
+}
+
+.fs-tools {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 28px;
+    padding-top: 16px;
+    border-top: 1px solid var(--player-line);
+}
+
+.fs-volume {
+    width: 116px;
+}
+
+.fs-brand {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    margin-left: auto;
+    color: var(--muted);
+    font-size: 0.7rem;
+    font-weight: 600;
+}
+
+.fs-brand img {
+    width: 17px;
+    height: 17px;
+    object-fit: contain;
+    border-radius: 4px;
+}
+
+.fs-queue {
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr);
+    max-height: min(520px, 68vh);
+    overflow: hidden;
+    background: var(--player-surface);
+    border: 1px solid var(--player-line);
+    border-radius: var(--player-radius);
+}
+
+.fs-queue .queue-list {
+    max-height: 440px;
+}
+
+@media (min-width: 1101px) {
+    #fs-queue-btn {
+        display: none;
+    }
+}

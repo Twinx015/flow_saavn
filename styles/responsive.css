@@ -1,0 +1,274 @@
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
+
+@media (max-width: 1100px) {
+    .fs-stage {
+        grid-template-columns: minmax(240px, 360px) minmax(300px, 1fr);
+        gap: 36px;
+        padding: 8px 32px 32px;
+    }
+
+    .fs-queue {
+        display: none;
+    }
+
+    .fullscreen-view.queue-open .fs-queue {
+        position: fixed;
+        top: 78px;
+        right: 20px;
+        bottom: 20px;
+        z-index: 4;
+        display: grid;
+        width: min(360px, calc(100vw - 40px));
+        max-height: none;
+        background: var(--player-surface);
+    }
+
+    .fullscreen-view.queue-open .fs-queue .queue-list {
+        max-height: none;
+    }
+}
+
+@media (max-width: 860px) {
+    .fs-stage {
+        grid-template-columns: 1fr;
+        align-items: start;
+        gap: 28px;
+        padding: 12px 24px 32px;
+    }
+
+    .fs-art-col {
+        display: flex;
+        justify-content: center;
+    }
+
+    .fs-art-frame {
+        width: min(62vw, 300px);
+    }
+
+    #fs-title {
+        font-size: clamp(1.8rem, 7vw, 2.6rem);
+    }
+
+    .fs-panel {
+        max-width: 560px;
+        width: 100%;
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .navbar-search {
+        margin: 0 8px;
+    }
+
+    .results {
+        padding: 0 70px 16px 16px;
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+
+    .cat-sidebar {
+        right: 10px;
+        padding: 6px;
+        gap: 6px;
+    }
+
+    .cat-btn {
+        width: 36px;
+        height: 36px;
+        font-size: 1rem;
+    }
+
+    body[data-layout="compact"] .results {
+        grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+    }
+
+    .detail-head {
+        grid-template-columns: 1fr;
+    }
+
+    .detail-head img {
+        max-width: 160px;
+    }
+
+    .row-card {
+        grid-template-columns: 24px 40px minmax(0, 1fr) auto;
+    }
+
+    .row-card .duration {
+        display: none;
+    }
+
+    .player {
+        right: 12px;
+        bottom: 12px;
+        width: min(var(--player-w), calc(100vw - 24px));
+    }
+
+    .player-queue {
+        position: fixed;
+        right: 12px;
+        bottom: calc(100% + 8px);
+        left: 12px;
+        width: auto;
+        max-height: 52vh;
+    }
+
+    body[data-player-style="bar"] .player .player-card {
+        width: 100%;
+        border-radius: 0;
+        border-right: 0;
+        border-bottom: 0;
+        border-left: 0;
+    }
+
+    body[data-player-style="bar"] .player-queue {
+        right: 12px;
+        bottom: calc(100% + 8px);
+        left: 12px;
+    }
+
+    body.player-open #app,
+    body[data-player-style="bar"].player-open #app {
+        padding-bottom: 150px;
+    }
+
+    .fs-top {
+        padding: 14px 16px;
+    }
+
+    .fs-tools {
+        margin-top: 22px;
+    }
+
+    .fs-brand {
+        display: none;
+    }
+}
+
+@media (max-width: 480px) {
+    :root {
+        --navbar-h: 104px;
+    }
+
+    .navbar {
+        height: var(--navbar-h);
+        flex-wrap: wrap;
+        align-content: center;
+        gap: 8px 10px;
+        padding: 10px 14px;
+    }
+
+    .brand {
+        font-size: 1.05rem;
+    }
+
+    .brand img {
+        width: 24px;
+        height: 24px;
+    }
+
+    .navbar-search {
+        order: 3;
+        flex: 1 0 100%;
+        max-width: none;
+        min-width: 0;
+        margin: 0;
+    }
+
+    .search-wrapper {
+        padding: 0 3px 0 12px;
+    }
+
+    .search-wrapper input {
+        padding: 7px 8px;
+        min-width: 0;
+        font-size: 0.85rem;
+    }
+
+    .search-btn {
+        padding: 6px 12px;
+        font-size: 0.78rem;
+    }
+
+    .cat-sidebar {
+        right: 6px;
+        padding: 4px;
+        gap: 4px;
+        border-radius: 10px;
+    }
+
+    .cat-btn {
+        width: 32px;
+        height: 32px;
+        font-size: 0.9rem;
+    }
+
+    .results {
+        padding: 0 50px 16px 16px;
+        grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+        gap: 8px;
+    }
+
+    .card {
+        padding: 8px;
+    }
+
+    .setting-row {
+        flex-wrap: wrap;
+    }
+
+    .setting-row input[type="range"] {
+        width: 100%;
+    }
+
+    .player-card {
+        padding: 9px 10px 6px;
+    }
+
+    .player-actions {
+        gap: 4px;
+    }
+
+    .player .volume-slider {
+        display: none;
+    }
+
+    .fs-controls {
+        gap: 2px;
+    }
+
+    .fs-controls .icon-btn {
+        width: 38px;
+        height: 38px;
+    }
+
+    .fs-play-btn {
+        width: 54px;
+        height: 54px;
+    }
+
+    .fs-volume {
+        width: 92px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .player,
+    .player-card,
+    .player-expand,
+    .player-toggle i,
+    .player-art {
+        transition: none;
+    }
+
+    .player-queue {
+        animation: none;
+    }
+
+    body.is-playing .vinyl,
+    body.is-playing .fs-vinyl {
+        animation: none;
+    }
+}

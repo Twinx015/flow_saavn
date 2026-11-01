@@ -9,15 +9,14 @@
             href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
         />
         <link rel="stylesheet" href="style.css" />
-        <link rel="icon" href="./logo.png" />
+        <link rel="icon" href="./logo.svg" />
     </head>
     <body>
         <div id="app">
             <nav class="navbar">
                 <span class="brand"
-                    ><img src="./logo.png" alt="" /><a
-                        href="https://philast-015.github.io/Singularity-Web/#/"
-                        >Singularity - Web</a
+                    ><img src="./logo.svg" alt="" /><a href="#/"
+                        >Flow[Saavan]</a
                     ></span
                 >
                 <form id="search-form" class="navbar-search">
@@ -33,33 +32,18 @@
                     </div>
                 </form>
                 <div class="nav-actions">
-                    <a
-                        href="#/settings"
+                    <button
+                        type="button"
                         class="nav-btn"
-                        data-nav="settings"
+                        data-open-settings
                         aria-label="Settings"
+                        aria-haspopup="dialog"
                     >
                         <i class="bi bi-gear"></i>
-                    </a>
+                    </button>
                 </div>
             </nav>
 
-            <aside id="notice-banner" class="notice-banner hidden">
-                <span
-                    >This is a <strong>demo website</strong> for the Singularity
-                    Project. For full features —
-                    <a
-                        href="https://github.com/Philast-015/Singularity/"
-                        id="dl-link"
-                        target="_blank"
-                        rel="noreferrer"
-                        >Download Singularity</a
-                    ></span
-                >
-                <button id="dismiss-notice" type="button" aria-label="Dismiss">
-                    &times;
-                </button>
-            </aside>
             <main id="main-view" class="view active">
                 <nav class="cat-sidebar" id="cat-sidebar">
                     <button
@@ -91,176 +75,319 @@
                 ></section>
             </main>
 
-            <section id="settings-view" class="view">
-                <div class="settings-header">
-                    <a
-                        href="#/"
-                        class="back-btn"
-                        data-nav="main"
-                        aria-label="Back"
-                    >
-                        <i class="bi bi-arrow-left"></i>
-                    </a>
-                    <h2>Settings</h2>
-                </div>
+            <div
+                id="settings-view"
+                class="settings-overlay"
+                role="dialog"
+                aria-modal="true"
+                aria-labelledby="settings-title"
+                aria-hidden="true"
+            >
+                <div class="settings-backdrop" data-close-settings></div>
+                <section class="settings-panel">
+                    <header class="settings-header">
+                        <div class="settings-heading">
+                            <span class="settings-eyebrow">Preferences</span>
+                            <h2 id="settings-title">Settings</h2>
+                            <p class="settings-subtitle">
+                                Personalize how Flow Saavan looks and plays.
+                            </p>
+                        </div>
+                        <button
+                            type="button"
+                            class="icon-btn settings-close"
+                            data-close-settings
+                            aria-label="Close settings"
+                        >
+                            <i class="bi bi-x-lg"></i>
+                        </button>
+                    </header>
 
-                <div class="settings-body">
-                    <div class="settings-section">
-                        <h3 class="settings-section-title">Appearance</h3>
-                        <div class="setting-row">
-                            <label for="theme-mode">Theme</label>
-                            <select id="theme-mode">
-                                <option value="dark">Dark</option>
-                                <option value="light">Light</option>
-                                <option value="midnight">Midnight</option>
-                                <option value="solar">Solar</option>
-                            </select>
-                        </div>
-                        <div class="setting-row">
-                            <label for="accent-color">Accent</label>
-                            <input
-                                id="accent-color"
-                                type="color"
-                                value="#6366f1"
-                            />
-                        </div>
+                    <div class="settings-body">
+                        <div class="settings-columns">
+                            <div class="settings-section">
+                                <h3 class="settings-section-title"><i class="bi bi-palette"></i><span>Appearance</span></h3>
+                                <div class="setting-row">
+                                    <label for="theme-mode">Theme</label>
+                                    <select id="theme-mode">
+                                        <option value="dark">Dark</option>
+                                        <option value="light">Light</option>
+                                        <option value="midnight">Midnight</option>
+                                        <option value="solar">Solar</option>
+                                    </select>
+                                </div>
+                                <div class="setting-row">
+                                    <label for="accent-color">Accent</label>
+                                    <input
+                                        id="accent-color"
+                                        type="color"
+                                        value="#6366f1"
+                                    />
+                                </div>
 
-                        <div class="setting-row">
-                            <label for="layout-style">Layout</label>
-                            <select id="layout-style">
-                                <option value="grid">Grid</option>
-                                <option value="list">List</option>
-                                <option value="compact">Compact</option>
-                            </select>
-                        </div>
-                        <div class="setting-row">
-                            <label for="image-shape">Image shape</label>
-                            <select id="image-shape">
-                                <option value="rounded">Rounded</option>
-                                <option value="square">Square</option>
-                                <option value="circle">Circle</option>
-                            </select>
+                                <div class="setting-row">
+                                    <label for="layout-style">Layout</label>
+                                    <select id="layout-style">
+                                        <option value="grid">Grid</option>
+                                        <option value="list">List</option>
+                                        <option value="compact">Compact</option>
+                                    </select>
+                                </div>
+                                <div class="setting-row">
+                                    <label for="image-shape">Image shape</label>
+                                    <select id="image-shape">
+                                        <option value="rounded">Rounded</option>
+                                        <option value="square">Square</option>
+                                        <option value="circle">Circle</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="settings-section">
+                                <h3 class="settings-section-title"><i class="bi bi-play-circle"></i><span>Player</span></h3>
+                                <div class="setting-row">
+                                    <label for="player-style">Style</label>
+                                    <select id="player-style">
+                                        <option value="dock">Floating card</option>
+                                        <option value="bar">Bottom bar</option>
+                                    </select>
+                                </div>
+                                <div class="setting-row">
+                                    <label for="player-accent">Accent source</label>
+                                    <select id="player-accent">
+                                        <option value="art">From artwork</option>
+                                        <option value="theme">Theme accent</option>
+                                        <option value="custom">Custom</option>
+                                    </select>
+                                </div>
+                                <div class="setting-row" id="player-custom-row">
+                                    <label for="player-custom-accent">
+                                        Custom accent
+                                    </label>
+                                    <input
+                                        id="player-custom-accent"
+                                        type="color"
+                                        value="#6366f1"
+                                    />
+                                </div>
+                                <div class="setting-row">
+                                    <label
+                                        >Player radius
+                                        <span
+                                            class="setting-value"
+                                            id="player-radius-output"
+                                            >18px</span
+                                        ></label
+                                    >
+                                    <input
+                                        id="player-radius"
+                                        type="range"
+                                        min="0"
+                                        max="32"
+                                        value="18"
+                                    />
+                                </div>
+                                <div class="setting-row toggle-row">
+                                    <label for="player-vinyl">Vinyl record</label>
+                                    <input id="player-vinyl" type="checkbox" checked />
+                                </div>
+                                <div class="setting-row toggle-row">
+                                    <label for="player-hover">Expand on hover</label>
+                                    <input id="player-hover" type="checkbox" checked />
+                                </div>
+                                <div class="setting-row toggle-row">
+                                    <label for="player-volume">Volume control</label>
+                                    <input id="player-volume" type="checkbox" checked />
+                                </div>
+                                <div class="setting-row toggle-row">
+                                    <label for="player-remaining"
+                                        >Show remaining time</label
+                                    >
+                                    <input id="player-remaining" type="checkbox" />
+                                </div>
+                                <div class="setting-row toggle-row">
+                                    <label for="player-tint"
+                                        >Tint card from artwork</label
+                                    >
+                                    <input id="player-tint" type="checkbox" checked />
+                                </div>
+                                <div class="setting-row toggle-row">
+                                    <label for="player-app-accent"
+                                        >Apply accent app-wide</label
+                                    >
+                                    <input id="player-app-accent" type="checkbox" />
+                                </div>
+                            </div>
+
+                            <div class="settings-section">
+                                <h3 class="settings-section-title"><i class="bi bi-rulers"></i><span>Dimensions</span></h3>
+                                <div class="setting-row">
+                                    <label
+                                        >Radius
+                                        <span class="setting-value" id="radius-output"
+                                            >18px</span
+                                        ></label
+                                    >
+                                    <input
+                                        id="radius-range"
+                                        type="range"
+                                        min="0"
+                                        max="34"
+                                        value="18"
+                                    />
+                                </div>
+                                <div class="setting-row">
+                                    <label
+                                        >Density
+                                        <span class="setting-value" id="density-output"
+                                            >12px</span
+                                        ></label
+                                    >
+                                    <input
+                                        id="density-range"
+                                        type="range"
+                                        min="6"
+                                        max="22"
+                                        value="12"
+                                    />
+                                </div>
+                                <div class="setting-row">
+                                    <label
+                                        >Font scale
+                                        <span class="setting-value" id="font-output"
+                                            >100%</span
+                                        ></label
+                                    >
+                                    <input
+                                        id="font-range"
+                                        type="range"
+                                        min="85"
+                                        max="120"
+                                        value="100"
+                                    />
+                                </div>
+                            </div>
+
+                            <div class="settings-section">
+                                <h3 class="settings-section-title"><i class="bi bi-volume-up"></i><span>Audio</span></h3>
+                                <div class="setting-row">
+                                    <label for="quality-select">Quality</label>
+                                    <select id="quality-select">
+                                        <option value="4">320 kbps</option>
+                                        <option value="3">160 kbps</option>
+                                        <option value="2">96 kbps</option>
+                                        <option value="1">48 kbps</option>
+                                        <option value="0">12 kbps</option>
+                                    </select>
+                                </div>
+                                <div class="setting-row">
+                                    <label
+                                        >Results
+                                        <span class="setting-value" id="limit-output"
+                                            >24</span
+                                        ></label
+                                    >
+                                    <input
+                                        id="limit-range"
+                                        type="range"
+                                        min="6"
+                                        max="50"
+                                        value="24"
+                                    />
+                                </div>
+                                <div class="setting-row">
+                                    <label for="api-base">API endpoint</label>
+                                    <input
+                                        id="api-base"
+                                        type="url"
+                                        value="https://teenapi.dino.icu/api"
+                                    />
+                                </div>
+                            </div>
+
+                            <div class="settings-section">
+                                <h3 class="settings-section-title"><i class="bi bi-sliders"></i><span>Toggles</span></h3>
+
+                                <div class="setting-row toggle-row">
+                                    <label for="motion-toggle">Motion</label>
+                                    <input id="motion-toggle" type="checkbox" checked />
+                                </div>
+                                <div class="setting-row toggle-row">
+                                    <label for="explicit-toggle"
+                                        >Show explicit tags</label
+                                    >
+                                    <input
+                                        id="explicit-toggle"
+                                        type="checkbox"
+                                        checked
+                                    />
+                                </div>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="settings-section">
-                        <h3 class="settings-section-title">Dimensions</h3>
-                        <div class="setting-row">
-                            <label
-                                >Radius
-                                <span class="setting-value" id="radius-output"
-                                    >18px</span
-                                ></label
-                            >
-                            <input
-                                id="radius-range"
-                                type="range"
-                                min="0"
-                                max="34"
-                                value="18"
-                            />
-                        </div>
-                        <div class="setting-row">
-                            <label
-                                >Density
-                                <span class="setting-value" id="density-output"
-                                    >12px</span
-                                ></label
-                            >
-                            <input
-                                id="density-range"
-                                type="range"
-                                min="6"
-                                max="22"
-                                value="12"
-                            />
-                        </div>
-                        <div class="setting-row">
-                            <label
-                                >Font scale
-                                <span class="setting-value" id="font-output"
-                                    >100%</span
-                                ></label
-                            >
-                            <input
-                                id="font-range"
-                                type="range"
-                                min="85"
-                                max="120"
-                                value="100"
-                            />
-                        </div>
-                    </div>
-
-                    <div class="settings-section">
-                        <h3 class="settings-section-title">Audio</h3>
-                        <div class="setting-row">
-                            <label for="quality-select">Quality</label>
-                            <select id="quality-select">
-                                <option value="4">320 kbps</option>
-                                <option value="3">160 kbps</option>
-                                <option value="2">96 kbps</option>
-                                <option value="1">48 kbps</option>
-                                <option value="0">12 kbps</option>
-                            </select>
-                        </div>
-                        <div class="setting-row">
-                            <label
-                                >Results
-                                <span class="setting-value" id="limit-output"
-                                    >24</span
-                                ></label
-                            >
-                            <input
-                                id="limit-range"
-                                type="range"
-                                min="6"
-                                max="50"
-                                value="24"
-                            />
-                        </div>
-                        <div class="setting-row">
-                            <label for="api-base">API endpoint</label>
-                            <input
-                                id="api-base"
-                                type="url"
-                                value="https://teenapi.dino.icu/api"
-                            />
-                        </div>
-                    </div>
-
-                    <div class="settings-section">
-                        <h3 class="settings-section-title">Toggles</h3>
-
-                        <div class="setting-row toggle-row">
-                            <label for="motion-toggle">Motion</label>
-                            <input id="motion-toggle" type="checkbox" checked />
-                        </div>
-                        <div class="setting-row toggle-row">
-                            <label for="explicit-toggle"
-                                >Show explicit tags</label
-                            >
-                            <input
-                                id="explicit-toggle"
-                                type="checkbox"
-                                checked
-                            />
-                        </div>
-                    </div>
-                </div>
-            </section>
+                    <footer class="settings-footer">
+                        <span class="settings-saved">
+                            <i class="bi bi-check2-circle"></i>
+                            Changes save automatically
+                        </span>
+                        <button
+                            type="button"
+                            class="settings-done"
+                            data-close-settings
+                        >
+                            Done
+                        </button>
+                    </footer>
+                </section>
+            </div>
         </div>
 
-        <footer id="player" class="player">
-            <div class="player-inner">
-                <img id="player-img" alt="" />
-                <div class="player-meta">
-                    <span id="player-title">Nothing playing</span>
-                    <span id="player-artist">Search and play a track</span>
+        <aside id="player" class="player" aria-label="Music player">
+            <div id="player-queue" class="player-queue" hidden>
+                <div class="queue-head">
+                    <div>
+                        <span class="queue-title">Queue</span>
+                        <span id="queue-label" class="queue-sub">0 tracks</span>
+                    </div>
+                    <button
+                        id="queue-close"
+                        class="icon-btn"
+                        type="button"
+                        aria-label="Close queue"
+                    >
+                        <i class="bi bi-x-lg"></i>
+                    </button>
                 </div>
-                <div class="player-controls">
+                <div id="player-queue-list" class="queue-list"></div>
+            </div>
+
+            <div class="player-card">
+                <button
+                    id="player-art-btn"
+                    class="player-art"
+                    type="button"
+                    aria-label="Open now playing"
+                >
+                    <span class="vinyl">
+                        <img id="player-img" alt="" />
+                        <span class="vinyl-hole"></span>
+                    </span>
+                </button>
+
+                <div class="player-meta">
+                    <span id="player-title" class="player-title"
+                        >Nothing playing</span
+                    >
+                    <span id="player-artist" class="player-artist"
+                        >Search and play a track</span
+                    >
+                </div>
+
+                <div class="player-transport">
                     <button
                         id="prev-btn"
+                        class="icon-btn step-btn"
                         type="button"
                         aria-label="Previous track"
                     >
@@ -268,68 +395,48 @@
                     </button>
                     <button
                         id="play-pause-btn"
+                        class="play-btn"
                         type="button"
-                        aria-label="Play/Pause"
+                        aria-label="Play"
                     >
                         <i class="bi bi-play-fill"></i>
                     </button>
-                    <button id="next-btn" type="button" aria-label="Next track">
+                    <button
+                        id="next-btn"
+                        class="icon-btn step-btn"
+                        type="button"
+                        aria-label="Next track"
+                    >
                         <i class="bi bi-skip-end-fill"></i>
                     </button>
                 </div>
-                <div class="player-timing">
-                    <span id="current-time" class="time-label">0:00</span>
-                    <input
-                        id="progress-bar"
-                        type="range"
-                        min="0"
-                        max="100"
-                        value="0"
-                        step="0.1"
-                        aria-label="Seek"
-                    />
-                    <span id="total-time" class="time-label">0:00</span>
-                </div>
+
                 <button
-                    id="expand-player"
-                    class="expand-player"
+                    id="player-toggle"
+                    class="icon-btn player-toggle"
                     type="button"
-                    aria-label="Fullscreen player"
+                    aria-label="Expand player"
+                    aria-expanded="false"
                 >
-                    <i class="bi bi-arrows-angle-expand"></i>
+                    <i class="bi bi-chevron-up"></i>
                 </button>
+
                 <button
                     id="close-player"
-                    class="close-player"
+                    class="icon-btn player-close"
                     type="button"
                     aria-label="Close player"
                 >
                     <i class="bi bi-x-lg"></i>
                 </button>
-                <audio id="audio" preload="none"></audio>
-            </div>
-        </footer>
 
-        <section id="fullscreen-view" class="view fullscreen-view">
-            <div class="fullscreen-bg" id="fullscreen-bg"></div>
-            <div class="fullscreen-inner">
-                <div class="fullscreen-top">
-                    <a href="#/" class="nav-btn" aria-label="Minimize">
-                        <i class="bi bi-arrows-angle-contract"></i>
-                    </a>
-                    <span class="fullscreen-now">Now Playing</span>
-                    <a href="#/settings" class="nav-btn" aria-label="Settings">
-                        <i class="bi bi-gear"></i>
-                    </a>
-                </div>
-                <div class="fullscreen-body">
-                    <img id="fs-img" alt="" />
-                    <h2 id="fs-title">Nothing playing</h2>
-                    <p id="fs-artist">Search and play a track</p>
-                    <div class="fs-progress">
-                        <span id="fs-current" class="time-label">0:00</span>
+                <div class="player-scrub-row">
+                    <span id="current-time" class="time-label">0:00</span>
+                    <div class="scrub">
+                        <span class="scrub-rail"></span>
+                        <span id="scrub-fill" class="scrub-fill"></span>
                         <input
-                            id="fs-progress"
+                            id="progress-bar"
                             type="range"
                             min="0"
                             max="100"
@@ -337,11 +444,174 @@
                             step="0.1"
                             aria-label="Seek"
                         />
-                        <span id="fs-total" class="time-label">0:00</span>
                     </div>
+                    <span id="total-time" class="time-label">0:00</span>
+                </div>
+
+                <div class="player-expand">
+                    <div class="player-actions">
+                        <div class="player-actions-group">
+                            <button
+                                id="shuffle-btn"
+                                class="icon-btn mode-btn"
+                                type="button"
+                                aria-label="Shuffle"
+                                aria-pressed="false"
+                                title="Shuffle"
+                            >
+                                <i class="bi bi-shuffle"></i>
+                            </button>
+                            <button
+                                id="repeat-btn"
+                                class="icon-btn mode-btn"
+                                type="button"
+                                aria-label="Repeat"
+                                aria-pressed="false"
+                                title="Repeat"
+                            >
+                                <i class="bi bi-repeat"></i>
+                            </button>
+                            <button
+                                id="queue-btn"
+                                class="icon-btn queue-btn"
+                                type="button"
+                                aria-label="Open queue"
+                                aria-expanded="false"
+                                title="Queue"
+                            >
+                                <i class="bi bi-list-ul"></i>
+                                <span id="queue-count" class="queue-count"
+                                    >0</span
+                                >
+                            </button>
+                        </div>
+                        <div class="player-actions-group">
+                            <div class="player-volume">
+                                <button
+                                    id="mute-btn"
+                                    class="icon-btn"
+                                    type="button"
+                                    aria-label="Mute"
+                                    title="Mute"
+                                >
+                                    <i class="bi bi-volume-up"></i>
+                                </button>
+                                <div class="volume-slider">
+                                    <span class="scrub-rail"></span>
+                                    <span
+                                        id="volume-fill"
+                                        class="scrub-fill"
+                                    ></span>
+                                    <input
+                                        id="volume-bar"
+                                        type="range"
+                                        min="0"
+                                        max="1"
+                                        value="1"
+                                        step="0.01"
+                                        aria-label="Volume"
+                                    />
+                                </div>
+                            </div>
+                            <button
+                                id="expand-player"
+                                class="icon-btn"
+                                type="button"
+                                aria-label="Open fullscreen player"
+                                title="Fullscreen"
+                            >
+                                <i class="bi bi-arrows-angle-expand"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <audio id="audio" preload="metadata"></audio>
+        </aside>
+
+        <section
+            id="fullscreen-view"
+            class="view fullscreen-view"
+            aria-label="Now playing"
+        >
+            <header class="fs-top">
+                <a href="#/" class="icon-btn" aria-label="Minimize">
+                    <i class="bi bi-chevron-down"></i>
+                </a>
+                <span class="fs-eyebrow">Now playing</span>
+                <div class="fs-top-actions">
+                    <button
+                        id="fs-queue-btn"
+                        class="icon-btn"
+                        type="button"
+                        aria-label="Toggle queue"
+                        aria-expanded="false"
+                    >
+                        <i class="bi bi-list-ul"></i>
+                    </button>
+                    <button
+                        type="button"
+                        class="icon-btn"
+                        data-open-settings
+                        aria-label="Settings"
+                        aria-haspopup="dialog"
+                    >
+                        <i class="bi bi-gear"></i>
+                    </button>
+                </div>
+            </header>
+
+            <div class="fs-stage">
+                <div class="fs-art-col">
+                    <div class="fs-art-frame">
+                        <div id="fs-vinyl" class="fs-vinyl">
+                            <img id="fs-label-img" alt="" />
+                            <span class="vinyl-hole"></span>
+                        </div>
+                        <img id="fs-img" alt="" />
+                    </div>
+                </div>
+
+                <div class="fs-panel">
+                    <p id="fs-source" class="fs-source">Now playing</p>
+                    <h2 id="fs-title">Nothing playing</h2>
+                    <p id="fs-artist" class="fs-artist">
+                        Search and play a track
+                    </p>
+
+                    <div class="fs-scrub">
+                        <div class="scrub">
+                            <span class="scrub-rail"></span>
+                            <span id="fs-scrub-fill" class="scrub-fill"></span>
+                            <input
+                                id="fs-progress"
+                                type="range"
+                                min="0"
+                                max="100"
+                                value="0"
+                                step="0.1"
+                                aria-label="Seek"
+                            />
+                        </div>
+                        <div class="fs-times">
+                            <span id="fs-current" class="time-label">0:00</span>
+                            <span id="fs-total" class="time-label">0:00</span>
+                        </div>
+                    </div>
+
                     <div class="fs-controls">
                         <button
+                            id="fs-shuffle"
+                            class="icon-btn mode-btn"
+                            type="button"
+                            aria-label="Shuffle"
+                            aria-pressed="false"
+                        >
+                            <i class="bi bi-shuffle"></i>
+                        </button>
+                        <button
                             id="fs-prev"
+                            class="icon-btn"
                             type="button"
                             aria-label="Previous"
                         >
@@ -349,19 +619,74 @@
                         </button>
                         <button
                             id="fs-play-pause"
+                            class="play-btn fs-play-btn"
                             type="button"
-                            aria-label="Play/Pause"
+                            aria-label="Play"
                         >
                             <i class="bi bi-play-fill"></i>
                         </button>
-                        <button id="fs-next" type="button" aria-label="Next">
+                        <button
+                            id="fs-next"
+                            class="icon-btn"
+                            type="button"
+                            aria-label="Next"
+                        >
                             <i class="bi bi-skip-end-fill"></i>
                         </button>
+                        <button
+                            id="fs-repeat"
+                            class="icon-btn mode-btn"
+                            type="button"
+                            aria-label="Repeat"
+                            aria-pressed="false"
+                        >
+                            <i class="bi bi-repeat"></i>
+                        </button>
+                    </div>
+
+                    <div class="fs-tools">
+                        <button
+                            id="fs-mute"
+                            class="icon-btn"
+                            type="button"
+                            aria-label="Mute"
+                        >
+                            <i class="bi bi-volume-up"></i>
+                        </button>
+                        <div class="volume-slider fs-volume">
+                            <span class="scrub-rail"></span>
+                            <span id="fs-volume-fill" class="scrub-fill"></span>
+                            <input
+                                id="fs-volume"
+                                type="range"
+                                min="0"
+                                max="1"
+                                value="1"
+                                step="0.01"
+                                aria-label="Volume"
+                            />
+                        </div>
+                        <span class="fs-brand" aria-hidden="true">
+                            <img src="./logo.svg" alt="" />
+                            <span>Flow Saavan</span>
+                        </span>
                     </div>
                 </div>
+
+                <aside id="fs-queue" class="fs-queue">
+                    <div class="queue-head">
+                        <div>
+                            <span class="queue-title">Queue</span>
+                            <span id="fs-queue-label" class="queue-sub"
+                                >0 tracks</span
+                            >
+                        </div>
+                    </div>
+                    <div id="fs-queue-list" class="queue-list"></div>
+                </aside>
             </div>
         </section>
 
-        <script src="script.js"></script>
+        <script type="module" src="src/main.js"></script>
     </body>
 </html>
