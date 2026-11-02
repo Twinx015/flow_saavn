@@ -32,13 +32,17 @@ export function renderCard(type, item, index) {
   `;
 }
 
-export function renderSongRow(song, index) {
+export function renderSongRow(song, index, { removable = false } = {}) {
   const title = getName(song);
   const artist = getSubtitle(song, "Artist");
   const duration = fmtDur(song.duration);
   const explicit = song.explicitContent
     ? '<span class="tag explicit-tag">Explicit</span>'
     : "";
+  const removeBtn =
+    removable && song.localId
+      ? `<button class="row-remove" type="button" data-local-remove="${escapeHtml(song.localId)}" aria-label="Remove ${escapeHtml(title)}" title="Remove from device"><i class="bi bi-trash3"></i></button>`
+      : "";
   return `
     <article class="row-card" data-play="${index}">
       <span class="index">${index + 1}</span>
@@ -49,7 +53,7 @@ export function renderSongRow(song, index) {
       </div>
       <span class="duration">${duration}</span>
       <button class="play-button alb" type="button" data-play="${index}"><i class="bi bi-play-fill"></i></button>
-      ${explicit}
+      ${explicit}${removeBtn}
     </article>
   `;
 }

@@ -11,6 +11,11 @@ import { clamp } from "./utils/format.js";
 import { navigateTo, router } from "./views/router.js";
 import { setStatus } from "./views/results.js";
 import {
+  deleteLocalSong,
+  importLocalFiles,
+  wipeLocalLibrary,
+} from "./views/local.js";
+import {
   closeSettings,
   isSettingsOpen,
   openSettings,
@@ -68,7 +73,50 @@ export function bindEvents() {
     });
   });
 
+  /* Local library: add files through the picker or drag-and-drop. */
+  const openLocalPicker = () => el.localInput?.click();
+  el.localAdd?.addEventListener("click", openLocalPicker);
+  el.localDrop?.addEventListener("click", openLocalPicker);
+  el.localDrop?.addEventListener("keydown", (e) => {
+    if (e.code === "Enter" || e.code === "Space") {
+      e.preventDefault();
+      openLocalPicker();
+    }
+  });
+  el.localInput?.addEventListener("change", (e) => {
+    const files = e.target.files;
+    if (files && files.length) importLocalFiles(files);
+    e.target.value = "";
+  });
+  ["dragenter", "dragover"].forEach((type) =>
+    el.localDrop?.addEventListener(type, (e) => {
+      e.preventDefault();
+      el.localDrop.classList.add("dragover");
+    }),
+  );
+  ["dragleave", "dragend"].forEach((type) =>
+    el.localDrop?.addEventListener(type, () => {
+      el.localDrop.classList.remove("dragover");
+    }),
+  );
+  el.localDrop?.addEventListener("drop", (e) => {
+    e.preventDefault();
+    el.localDrop.classList.remove("dragover");
+    if (e.dataTransfer?.files?.length) importLocalFiles(e.dataTransfer.files);
+  });
+  el.localClear?.addEventListener("click", () => {
+    if (!state.localTracks.length) return;
+    if (confirm("Remove every local song from this browser?")) {
+      wipeLocalLibrary();
+    }
+  });
+
   document.addEventListener("click", (e) => {
+    if (e.target.closest("[data-local-library]")) {
+      e.preventDefault();
+      navigateTo("#/local");
+      return;
+    }
     if (e.target.closest("[data-open-settings]")) {
       e.preventDefault();
       openSettings();
@@ -78,6 +126,12 @@ export function bindEvents() {
       e.preventDefault();
       closeSettings();
       if (location.hash === "#/settings") navigateTo("#/");
+      return;
+    }
+    const removeLocal = e.target.closest("[data-local-remove]");
+    if (removeLocal) {
+      e.preventDefault();
+      deleteLocalSong(removeLocal.dataset.localRemove);
       return;
     }
 

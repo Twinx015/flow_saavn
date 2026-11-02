@@ -5,6 +5,7 @@ import { state } from "../core/state.js";
 import { savePlayerState } from "../core/storage.js";
 import { setImg } from "../utils/format.js";
 import { openCollection, runSearch, setStatus, cancelPendingLoads } from "./results.js";
+import { renderLocalView } from "./local.js";
 import { closeSettings, openSettings } from "./settings.js";
 import {
   renderQueue,
@@ -41,9 +42,29 @@ export function router() {
     if (v) v.classList.remove("active");
   });
 
+  /* Leave the local library before deciding which view to show. */
+  el.localView?.classList.add("hidden");
+  el.results?.classList.remove("hidden");
+  document.body.classList.remove("local-mode");
+  el.localBtn?.classList.remove("active");
+
   if (hash === "#/player") {
     el.fullscreenView.classList.add("active");
     syncFullscreen();
+    return;
+  }
+
+  if (hash === "#/local") {
+    el.mainView.classList.add("active");
+    el.detail.classList.add("hidden");
+    el.results.classList.add("hidden");
+    el.localView.classList.remove("hidden");
+    document.body.classList.add("local-mode");
+    el.localBtn?.classList.add("active");
+    el.input.value = "";
+    state.query = "";
+    renderLocalView();
+    savePlayerState();
     return;
   }
 

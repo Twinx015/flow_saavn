@@ -44,7 +44,7 @@ body[data-theme="light"] .navbar {
     place-items: center;
     width: 36px;
     height: 36px;
-    border-radius: 10px;
+    border-radius: var(--control-radius);
     background: var(--surface);
     border: 1px solid var(--border);
     font-size: 1.1rem;
@@ -56,6 +56,12 @@ body[data-theme="light"] .navbar {
     background: var(--surface-hover);
     border-color: var(--border-hover);
     color: var(--text);
+}
+
+.nav-btn.active {
+    background: rgba(var(--primary-rgb), 0.15);
+    border-color: rgba(var(--primary-rgb), 0.35);
+    color: var(--primary);
 }
 
 .notice-banner {
@@ -89,7 +95,7 @@ body[data-theme="light"] .navbar {
     place-items: center;
     width: 28px;
     height: 28px;
-    border-radius: 8px;
+    border-radius: var(--control-radius);
     font-size: 1.15rem;
     color: var(--muted);
     background: var(--surface);
@@ -166,7 +172,7 @@ body[data-theme="light"] .navbar {
 
 .search-btn {
     padding: 6px 14px;
-    border-radius: calc(var(--radius) - 4px);
+    border-radius: var(--control-radius);
     background: var(--primary);
     color: #fff;
     font-weight: 600;

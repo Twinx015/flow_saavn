@@ -11,7 +11,7 @@
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border: 1px solid var(--border);
-    border-radius: 14px;
+    border-radius: var(--radius);
     padding: 8px;
 }
 
@@ -24,7 +24,7 @@ body[data-theme="light"] .cat-sidebar {
     place-items: center;
     width: 40px;
     height: 40px;
-    border-radius: 10px;
+    border-radius: var(--control-radius);
     font-size: 1.15rem;
     color: var(--muted);
     background: transparent;
@@ -127,7 +127,7 @@ body[data-layout="compact"] .results {
 
 .play-button {
     padding: 7px 14px;
-    border-radius: 999px;
+    border-radius: var(--control-radius);
     font-size: 0.8rem;
     font-weight: 600;
     background: rgba(var(--primary-rgb), 0.12);
@@ -149,7 +149,7 @@ body[data-layout="compact"] .results {
     display: inline-flex;
     align-items: center;
     padding: 6px 12px;
-    border-radius: 999px;
+    border-radius: var(--control-radius);
     font-size: 0.8rem;
     background: var(--surface);
     border: 1px solid var(--border);

@@ -9,6 +9,7 @@ import {
 } from "../core/storage.js";
 import { api } from "../utils/api.js";
 import { audioUrl, clamp } from "../utils/format.js";
+import { getLocalObjectUrl } from "../core/local.js";
 import { navigateTo } from "../views/router.js";
 import { applyPlayerTheme } from "./theme.js";
 import {
@@ -108,7 +109,15 @@ export async function startTrack(list, index) {
   let song = original;
   let src = audioUrl(song);
 
-  if (!src && song.id) {
+  if (song.isLocal && song.localId) {
+    /* Local tracks live in IndexedDB, so resolve a fresh blob URL. */
+    src = await getLocalObjectUrl(song.localId);
+    if (token !== state.loadToken) return;
+    if (!src) {
+      showPlayerNote("This local file is no longer stored in this browser.");
+      return;
+    }
+  } else if (!src && song.id) {
     try {
       const full = await api(`/songs?ids=${encodeURIComponent(song.id)}`);
       if (token !== state.loadToken) return;

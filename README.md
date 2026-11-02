@@ -8,6 +8,13 @@ Open the link in web browser
 https://philast-015.github.io/Singularity-Web/
 ```
 
+## Local songs
+
+Click the folder icon in the top bar to open the local library. Add audio files
+from your device, or drag them onto the drop zone. Files are stored in this
+browser's IndexedDB only, never uploaded, and can be played, queued, and
+removed like any other track. Clearing site data removes them.
+
 ## Cloning
 ```
 git clone https://github.com/philast-015/singularity-web/
@@ -25,6 +32,7 @@ styles/
   base.css                 Variables, resets, shared primitives
   navbar.css               Top bar and search
   library.css              Result cards, song rows, detail view
+  local.css                Local / offline library view
   settings.css             Settings modal
   player.css               Mini player, queue, bottom-bar variant
   fullscreen.css           Fullscreen "Now playing" view
@@ -36,6 +44,7 @@ src/
     config.js              Constants (storage keys, defaults)
     state.js               Shared application state
     dom.js                 Cached element lookups ($, $$, el)
+    local.js               IndexedDB storage for local audio files
     storage.js             localStorage settings + last session
   utils/
     api.js                 API fetch wrapper
@@ -49,6 +58,7 @@ src/
     restore.js             Restores the last session
   views/
     cards.js               Card and song-row markup
+    local.js               Local library view (add / list / remove)
     results.js             Search results and collection detail
     router.js              Hash routing
     settings.js            Settings modal + bindings

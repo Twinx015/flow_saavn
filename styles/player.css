@@ -1,7 +1,3 @@
-/* ==========================================================================
-   Player
-   ========================================================================== */
-
 .player {
     --player-w: 348px;
     --player-surface: var(--bg-soft);
@@ -69,7 +65,7 @@ body.player-tint .player {
     width: 44px;
     height: 44px;
     padding: 0;
-    border-radius: 50%;
+    border-radius: var(--control-radius);
     background: transparent;
     transition:
         width 0.25s cubic-bezier(0.2, 0.8, 0.2, 1),
@@ -179,7 +175,7 @@ body.is-playing .fs-vinyl {
     width: 32px;
     height: 32px;
     flex-shrink: 0;
-    border-radius: 8px;
+    border-radius: var(--control-radius);
     color: var(--muted);
     transition:
         background 0.15s ease,
@@ -209,7 +205,7 @@ body.is-playing .fs-vinyl {
     width: 38px;
     height: 38px;
     flex-shrink: 0;
-    border-radius: 50%;
+    border-radius: var(--control-radius);
     background: var(--player-accent);
     color: var(--player-accent-ink);
     transition:
@@ -464,13 +460,13 @@ body.hide-player-volume .player-volume {
 }
 
 body.no-vinyl .player-art {
-    border-radius: 10px;
+    border-radius: var(--control-radius);
 }
 
 body.no-vinyl .vinyl {
     animation: none;
     border-color: var(--player-line);
-    border-radius: 10px;
+    border-radius: var(--control-radius);
     background: transparent;
 }
 
@@ -568,7 +564,7 @@ body.no-vinyl .fs-vinyl {
     align-items: center;
     gap: 8px;
     padding: 5px 6px;
-    border-radius: calc(var(--player-radius) * 0.45);
+    border-radius: var(--control-radius);
     text-align: left;
     transition: background 0.15s ease;
 }
@@ -650,8 +646,7 @@ body[data-player-style="bar"] .player {
 body[data-player-style="bar"] .player-card {
     width: 100%;
     margin: 0;
-    padding: 10px
-        max(12px, calc((100% - 1120px) / 2 + 12px))
+    padding: 10px max(12px, calc((100% - 1120px) / 2 + 12px))
         max(12px, env(safe-area-inset-bottom, 0px));
     border-right: 0;
     border-bottom: 0;

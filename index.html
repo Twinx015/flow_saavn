@@ -35,6 +35,15 @@
                     <button
                         type="button"
                         class="nav-btn"
+                        data-local-library
+                        aria-label="Local files"
+                        title="Local files"
+                    >
+                        <i class="bi bi-folder2-open"></i>
+                    </button>
+                    <button
+                        type="button"
+                        class="nav-btn"
                         data-open-settings
                         aria-label="Settings"
                         aria-haspopup="dialog"
@@ -73,6 +82,68 @@
                     class="results"
                     aria-live="polite"
                 ></section>
+
+                <section id="local-view" class="local-view hidden">
+                    <header class="local-head">
+                        <div class="local-heading">
+                            <p class="hero-eyebrow">On this device</p>
+                            <h2>Local library</h2>
+                            <p class="local-sub">
+                                Audio files are saved in this browser only and
+                                are never uploaded.
+                            </p>
+                        </div>
+                        <div class="local-actions">
+                            <button
+                                id="local-add"
+                                type="button"
+                                class="play-button"
+                            >
+                                <i class="bi bi-plus-lg"></i> Add files
+                            </button>
+                            <button
+                                id="local-clear"
+                                type="button"
+                                class="pill-button"
+                                disabled
+                            >
+                                Clear all
+                            </button>
+                        </div>
+                    </header>
+
+                    <div
+                        id="local-drop"
+                        class="local-drop"
+                        role="button"
+                        tabindex="0"
+                        aria-label="Add local audio files"
+                    >
+                        <i class="bi bi-cloud-arrow-up"></i>
+                        <strong>Drop audio files here</strong>
+                        <span
+                            >or click to browse — MP3, M4A, WAV, OGG, FLAC</span
+                        >
+                    </div>
+
+                    <p id="local-meta" class="local-meta">Nothing stored yet</p>
+                    <p
+                        id="local-status"
+                        class="local-status"
+                        role="status"
+                        aria-live="polite"
+                    ></p>
+
+                    <div id="local-list" class="local-list"></div>
+
+                    <input
+                        id="local-input"
+                        type="file"
+                        accept="audio/*,.mp3,.m4a,.aac,.ogg,.oga,.opus,.wav,.flac"
+                        multiple
+                        hidden
+                    />
+                </section>
             </main>
 
             <div
@@ -106,13 +177,18 @@
                     <div class="settings-body">
                         <div class="settings-columns">
                             <div class="settings-section">
-                                <h3 class="settings-section-title"><i class="bi bi-palette"></i><span>Appearance</span></h3>
+                                <h3 class="settings-section-title">
+                                    <i class="bi bi-palette"></i
+                                    ><span>Appearance</span>
+                                </h3>
                                 <div class="setting-row">
                                     <label for="theme-mode">Theme</label>
                                     <select id="theme-mode">
                                         <option value="dark">Dark</option>
                                         <option value="light">Light</option>
-                                        <option value="midnight">Midnight</option>
+                                        <option value="midnight">
+                                            Midnight
+                                        </option>
                                         <option value="solar">Solar</option>
                                     </select>
                                 </div>
@@ -144,19 +220,30 @@
                             </div>
 
                             <div class="settings-section">
-                                <h3 class="settings-section-title"><i class="bi bi-play-circle"></i><span>Player</span></h3>
+                                <h3 class="settings-section-title">
+                                    <i class="bi bi-play-circle"></i
+                                    ><span>Player</span>
+                                </h3>
                                 <div class="setting-row">
                                     <label for="player-style">Style</label>
                                     <select id="player-style">
-                                        <option value="dock">Floating card</option>
+                                        <option value="dock">
+                                            Floating card
+                                        </option>
                                         <option value="bar">Bottom bar</option>
                                     </select>
                                 </div>
                                 <div class="setting-row">
-                                    <label for="player-accent">Accent source</label>
+                                    <label for="player-accent"
+                                        >Accent source</label
+                                    >
                                     <select id="player-accent">
-                                        <option value="art">From artwork</option>
-                                        <option value="theme">Theme accent</option>
+                                        <option value="art">
+                                            From artwork
+                                        </option>
+                                        <option value="theme">
+                                            Theme accent
+                                        </option>
                                         <option value="custom">Custom</option>
                                     </select>
                                 </div>
@@ -188,43 +275,76 @@
                                     />
                                 </div>
                                 <div class="setting-row toggle-row">
-                                    <label for="player-vinyl">Vinyl record</label>
-                                    <input id="player-vinyl" type="checkbox" checked />
+                                    <label for="player-vinyl"
+                                        >Vinyl record</label
+                                    >
+                                    <input
+                                        id="player-vinyl"
+                                        type="checkbox"
+                                        checked
+                                    />
                                 </div>
                                 <div class="setting-row toggle-row">
-                                    <label for="player-hover">Expand on hover</label>
-                                    <input id="player-hover" type="checkbox" checked />
+                                    <label for="player-hover"
+                                        >Expand on hover</label
+                                    >
+                                    <input
+                                        id="player-hover"
+                                        type="checkbox"
+                                        checked
+                                    />
                                 </div>
                                 <div class="setting-row toggle-row">
-                                    <label for="player-volume">Volume control</label>
-                                    <input id="player-volume" type="checkbox" checked />
+                                    <label for="player-volume"
+                                        >Volume control</label
+                                    >
+                                    <input
+                                        id="player-volume"
+                                        type="checkbox"
+                                        checked
+                                    />
                                 </div>
                                 <div class="setting-row toggle-row">
                                     <label for="player-remaining"
                                         >Show remaining time</label
                                     >
-                                    <input id="player-remaining" type="checkbox" />
+                                    <input
+                                        id="player-remaining"
+                                        type="checkbox"
+                                    />
                                 </div>
                                 <div class="setting-row toggle-row">
                                     <label for="player-tint"
                                         >Tint card from artwork</label
                                     >
-                                    <input id="player-tint" type="checkbox" checked />
+                                    <input
+                                        id="player-tint"
+                                        type="checkbox"
+                                        checked
+                                    />
                                 </div>
                                 <div class="setting-row toggle-row">
                                     <label for="player-app-accent"
                                         >Apply accent app-wide</label
                                     >
-                                    <input id="player-app-accent" type="checkbox" />
+                                    <input
+                                        id="player-app-accent"
+                                        type="checkbox"
+                                    />
                                 </div>
                             </div>
 
                             <div class="settings-section">
-                                <h3 class="settings-section-title"><i class="bi bi-rulers"></i><span>Dimensions</span></h3>
+                                <h3 class="settings-section-title">
+                                    <i class="bi bi-rulers"></i
+                                    ><span>Dimensions</span>
+                                </h3>
                                 <div class="setting-row">
                                     <label
                                         >Radius
-                                        <span class="setting-value" id="radius-output"
+                                        <span
+                                            class="setting-value"
+                                            id="radius-output"
                                             >18px</span
                                         ></label
                                     >
@@ -239,7 +359,9 @@
                                 <div class="setting-row">
                                     <label
                                         >Density
-                                        <span class="setting-value" id="density-output"
+                                        <span
+                                            class="setting-value"
+                                            id="density-output"
                                             >12px</span
                                         ></label
                                     >
@@ -254,7 +376,9 @@
                                 <div class="setting-row">
                                     <label
                                         >Font scale
-                                        <span class="setting-value" id="font-output"
+                                        <span
+                                            class="setting-value"
+                                            id="font-output"
                                             >100%</span
                                         ></label
                                     >
@@ -269,7 +393,10 @@
                             </div>
 
                             <div class="settings-section">
-                                <h3 class="settings-section-title"><i class="bi bi-volume-up"></i><span>Audio</span></h3>
+                                <h3 class="settings-section-title">
+                                    <i class="bi bi-volume-up"></i
+                                    ><span>Audio</span>
+                                </h3>
                                 <div class="setting-row">
                                     <label for="quality-select">Quality</label>
                                     <select id="quality-select">
@@ -283,7 +410,9 @@
                                 <div class="setting-row">
                                     <label
                                         >Results
-                                        <span class="setting-value" id="limit-output"
+                                        <span
+                                            class="setting-value"
+                                            id="limit-output"
                                             >24</span
                                         ></label
                                     >
@@ -297,20 +426,23 @@
                                 </div>
                                 <div class="setting-row">
                                     <label for="api-base">API endpoint</label>
-                                    <input
-                                        id="api-base"
-                                        type="url"
-                                        value="https://teenapi.dino.icu/api"
-                                    />
+                                    <select id="api-base"></select>
                                 </div>
                             </div>
 
                             <div class="settings-section">
-                                <h3 class="settings-section-title"><i class="bi bi-sliders"></i><span>Toggles</span></h3>
+                                <h3 class="settings-section-title">
+                                    <i class="bi bi-sliders"></i
+                                    ><span>Toggles</span>
+                                </h3>
 
                                 <div class="setting-row toggle-row">
                                     <label for="motion-toggle">Motion</label>
-                                    <input id="motion-toggle" type="checkbox" checked />
+                                    <input
+                                        id="motion-toggle"
+                                        type="checkbox"
+                                        checked
+                                    />
                                 </div>
                                 <div class="setting-row toggle-row">
                                     <label for="explicit-toggle"

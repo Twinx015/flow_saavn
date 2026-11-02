@@ -23,4 +23,5 @@ export const state = {
   expanded: false,
   loadToken: 0,
   accentToken: 0,
+  localTracks: [],
 };

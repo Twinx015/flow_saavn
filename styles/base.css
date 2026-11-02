@@ -10,6 +10,7 @@
     --text: #f0f0f2;
     --muted: #8a8a96;
     --radius: 16px;
+    --control-radius: calc(var(--radius) * 0.625);
     --density: 12px;
     --font-scale: 1;
 
@@ -73,9 +74,11 @@ body.hide-explicit .explicit-tag {
 
 input,
 button,
-select {
+select,
+textarea {
     font: inherit;
     color: inherit;
+    border-radius: var(--control-radius);
 }
 
 button {

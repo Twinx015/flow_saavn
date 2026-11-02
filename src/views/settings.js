@@ -1,6 +1,6 @@
 /* Binds every control on the settings screen to state / CSS variables. */
 
-import { DEFAULT_ACCENT } from "../core/config.js";
+import { API_OPTIONS, DEFAULT_ACCENT } from "../core/config.js";
 import { $, el } from "../core/dom.js";
 import { state } from "../core/state.js";
 import { saveSettings, storedSettings } from "../core/storage.js";
@@ -155,11 +155,19 @@ export function bindSettings() {
     saveSettings({ "quality-select": e.target.value });
   });
 
-  const apiInput = $("#api-base");
-  apiInput.value = saved["api-base"] || state.baseUrl;
-  state.baseUrl = apiInput.value.replace(/\/$/, "");
-  apiInput.addEventListener("change", (e) => {
-    state.baseUrl = e.target.value.replace(/\/$/, "");
+  const normalizeApi = (value) => String(value || "").replace(/\/+$/, "");
+  const apiSelect = $("#api-base");
+  apiSelect.innerHTML = API_OPTIONS.map(
+    (option) => `<option value="${option.value}">${option.label}</option>`,
+  ).join("");
+  const savedApi = normalizeApi(saved["api-base"]);
+  const savedOption = API_OPTIONS.find(
+    (option) => normalizeApi(option.value) === savedApi,
+  );
+  apiSelect.value = (savedOption || API_OPTIONS[0]).value;
+  state.baseUrl = normalizeApi(apiSelect.value);
+  apiSelect.addEventListener("change", (e) => {
+    state.baseUrl = normalizeApi(e.target.value);
     saveSettings({ "api-base": e.target.value });
   });
 

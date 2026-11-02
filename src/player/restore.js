@@ -3,6 +3,7 @@
 import { el } from "../core/dom.js";
 import { state } from "../core/state.js";
 import { storedSettings } from "../core/storage.js";
+import { getLocalObjectUrl } from "../core/local.js";
 import { audioUrl, clamp } from "../utils/format.js";
 import { syncFullscreen } from "../views/router.js";
 import {
@@ -14,7 +15,7 @@ import {
   updateVolumeUI,
 } from "./ui.js";
 
-export function restorePlayer(data) {
+export async function restorePlayer(data) {
   if (!data || !data.allSongs || !data.allSongs.length) return;
   if (el.player.classList.contains("open")) return;
 
@@ -34,7 +35,10 @@ export function restorePlayer(data) {
   renderQueue();
 
   const song = state.currentSong;
-  const src = audioUrl(song);
+  const src =
+    song.isLocal && song.localId
+      ? await getLocalObjectUrl(song.localId)
+      : audioUrl(song);
   if (!src) return;
 
   state.duration = Number(song.duration) || 0;

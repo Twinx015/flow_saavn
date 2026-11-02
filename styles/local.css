@@ -1,0 +1,166 @@
+.local-view {
+    max-width: 1200px;
+    margin: 20px auto 0;
+    padding: 0 80px 24px 24px;
+}
+
+.local-mode .cat-sidebar {
+    display: none;
+}
+
+.local-head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 22px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface);
+}
+
+.local-heading h2 {
+    margin-top: 4px;
+    font-size: clamp(1.4rem, 3vw, 1.8rem);
+    font-weight: 750;
+    letter-spacing: -0.01em;
+}
+
+.local-sub {
+    margin-top: 6px;
+    max-width: 46ch;
+    font-size: 0.88rem;
+    line-height: 1.5;
+    color: var(--muted);
+}
+
+.local-actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.local-actions .play-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.local-actions .pill-button:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
+.local-drop {
+    display: grid;
+    place-items: center;
+    gap: 4px;
+    margin-top: 16px;
+    padding: 26px 20px;
+    text-align: center;
+    border: 1.5px dashed var(--border-hover);
+    border-radius: var(--radius);
+    background: rgba(var(--primary-rgb), 0.03);
+    color: var(--muted);
+    cursor: pointer;
+    transition:
+        border-color 0.2s ease,
+        background 0.2s ease;
+}
+
+.local-drop i {
+    font-size: 1.8rem;
+    color: var(--primary);
+}
+
+.local-drop strong {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text);
+}
+
+.local-drop span {
+    font-size: 0.8rem;
+}
+
+.local-drop:hover,
+.local-drop:focus-visible,
+.local-drop.dragover {
+    border-color: rgba(var(--primary-rgb), 0.6);
+    background: rgba(var(--primary-rgb), 0.08);
+    outline: none;
+}
+
+.local-meta {
+    margin-top: 16px;
+    font-size: 0.8rem;
+    color: var(--muted);
+}
+
+.local-status {
+    min-height: 1.2em;
+    margin-top: 4px;
+    font-size: 0.82rem;
+    color: var(--primary);
+}
+
+.local-list {
+    display: grid;
+    gap: 6px;
+    margin-top: 10px;
+}
+
+.local-list .row-card {
+    grid-template-columns: 30px 48px minmax(0, 1fr) auto auto auto;
+}
+
+.row-remove {
+    display: grid;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    border-radius: var(--control-radius);
+    background: transparent;
+    border: 1px solid transparent;
+    color: var(--muted);
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.row-remove:hover {
+    background: rgba(239, 68, 68, 0.12);
+    border-color: rgba(239, 68, 68, 0.28);
+    color: #ef4444;
+}
+
+@media (max-width: 768px) {
+    .local-view {
+        padding: 0 16px 16px;
+    }
+
+    .local-head {
+        padding: 18px;
+    }
+}
+
+@media (max-width: 480px) {
+    .local-head {
+        padding: 16px;
+    }
+
+    .local-actions {
+        width: 100%;
+    }
+
+    .local-actions .play-button,
+    .local-actions .pill-button {
+        flex: 1;
+        justify-content: center;
+    }
+
+    .local-drop {
+        padding: 20px 14px;
+    }
+}
