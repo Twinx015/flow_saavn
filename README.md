@@ -24,7 +24,7 @@ For a fuller player, check my profile and see **Flow**.
 
 ## Run locally
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/Twinx015/flow_saavn/
 cd flow-saavn
 # open index.html, or run a local server
 python -m http.server
